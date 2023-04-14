@@ -16,17 +16,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         setup();
 
-
-
-
         Terminal terminal = TerminalBuilder.terminal();
         LineReader lineReader = LineReaderBuilder.builder()
                 .terminal(terminal)
                 .build();
 
         String line;
-        while ((line = lineReader.readLine("> ")) != null) {
-            System.out.println("You typed: " + line);
+        while ((line = lineReader.readLine("BlockNet > ")) != null) {
+            System.out.println("Du hast eingetippt: " + line);
         }
     }
 
