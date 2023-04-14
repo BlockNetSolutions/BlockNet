@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
 }
 
 group = 'org.example'
@@ -8,19 +9,6 @@ version = '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-
-
-
-jar {
-    manifest {
-        attributes(
-                "Main-Class": "de.blocknet.cloud.Main"
-        )
-    }
-}
-
-
-
 
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
@@ -33,4 +21,14 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+shadowJar {
+    archiveFileName = "${archivesBaseName}-${version}.jar"
+    destinationDirectory = file("$buildDir/jars")
+    manifest {
+        attributes(
+                "Main-Class": "de.blocknet.cloud.Main"
+        )
+    }
 }
