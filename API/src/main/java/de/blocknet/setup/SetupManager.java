@@ -1,39 +1,74 @@
 package de.blocknet.setup;
 
 import de.blocknet.api.gson.ModuleManager;
-import java.io.File;
+
+import java.io.*;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SetupManager {
 
-    private boolean isMaster;
     private ModuleManager moduleManager;
 
-    public SetupManager(boolean isMaster) {
-        this.isMaster = isMaster;
+    public SetupManager(Logger logger, String input) {
         moduleManager = new ModuleManager();
-        if(isMaster) {
-            moduleManager.createdictionary("Master/config/wrappers");
-            moduleManager.createdictionary("Master/templates/lobbies");
-            moduleManager.createdictionary("Master/templates/proxies");
-            moduleManager.createdictionary("Master/templates/servers");
+        input = input.toLowerCase();
+        switch (input){
+            case "master":
+                    startSetupMaster();
+                    logger.info("§aDer Master wurde nun erstellt, stoppe nun das Setup und erstelle mindestens eine Base.");
+                break;
+            case "base":
+                    startSetupBase();
+                    logger.info("§aEs wurde nun eine Base erstellt.");
+                break;
+        }
+    }
 
-        } else {
-            File currentDirectory = new File(System.getProperty("user.dir"));
-            String number = "";
-            for(File file : currentDirectory.listFiles()) {
-                if(file.getName().contains("Base")) {
-                    number = file.getName().substring(5) + 1;
-                } else {
-                    number = "1";
-                }
+    public void startSetupMaster() {
+
+        moduleManager.createdictionary("templates/lobbies");
+        moduleManager.createdictionary("templates/proxies");
+        moduleManager.createdictionary("templates/servers");
+        try (InputStream in = getClass().getResourceAsStream("/start_master");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
             }
-            moduleManager.createdictionary("Base-" + number + "/static/lobbies");
-            moduleManager.createdictionary("Base-" + number + "/static/servers");
-            moduleManager.createdictionary("Base-" + number + "/static/proxies");
-
-            moduleManager.createdictionary("Base-" + number + "/temporary/lobbies");
-            moduleManager.createdictionary("Base-" + number + "/temporary/servers");
-            moduleManager.createdictionary("Base-" + number + "/temporary/proxies");
+            File startfile = new File("start.sh");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(startfile));
+            writer.write(line);
+            writer.flush();
+            writer.close();
+            startfile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void startSetupBase() {
+        moduleManager.createdictionary("/static/lobbies");
+        moduleManager.createdictionary("/static/servers");
+        moduleManager.createdictionary("/static/proxies");
+        moduleManager.createdictionary("/temporary/lobbies");
+        moduleManager.createdictionary("/temporary/servers");
+        moduleManager.createdictionary("/temporary/proxies");
+        try (InputStream in = getClass().getResourceAsStream("/start_base");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            File startfile = new File("start.sh");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(startfile));
+            writer.write(line);
+            writer.flush();
+            writer.close();
+            startfile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
