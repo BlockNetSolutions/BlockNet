@@ -37,8 +37,6 @@ public class Main {
         });
 
         logger.addHandler(handler);
-        setup();
-
 
         Terminal terminal = TerminalBuilder.terminal();
         LineReader lineReader = LineReaderBuilder.builder()
@@ -55,11 +53,5 @@ public class Main {
         }
     }
 
-    private static void setup() {
-        isSetup = true;
-        if(isSetup) {
-            setupManager = new SetupManager(true);
-        }
-    }
 }
 

@@ -28,7 +28,6 @@ public class SetupManager {
     }
 
     public void startSetupMaster() {
-        moduleManager.createdictionary("config/wrappers");
         moduleManager.createdictionary("templates/lobbies");
         moduleManager.createdictionary("templates/proxies");
         moduleManager.createdictionary("templates/servers");
