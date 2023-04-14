@@ -14,11 +14,6 @@ public class Main {
     private static boolean isSetup;
 
     public static void main(String[] args) throws IOException {
-        setup();
-
-
-
-
         Terminal terminal = TerminalBuilder.terminal();
         LineReader lineReader = LineReaderBuilder.builder()
                 .terminal(terminal)
@@ -30,11 +25,5 @@ public class Main {
         }
     }
 
-    private static void setup() {
-        isSetup = true;
-        if(isSetup) {
-            setupManager = new SetupManager(true);
-        }
-    }
 }
 
