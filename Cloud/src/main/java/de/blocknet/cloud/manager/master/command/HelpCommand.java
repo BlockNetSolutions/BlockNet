@@ -6,6 +6,8 @@ import de.blocknet.cloud.utils.MessageStyler;
 import org.jline.terminal.Terminal;
 import org.jline.utils.AttributedStyle;
 
+import java.util.Arrays;
+
 public class HelpCommand implements Command {
 
     @Override
@@ -38,7 +40,11 @@ public class HelpCommand implements Command {
     }
 
     public void printHelp(Command command) {
-        MessageStyler.sendInfo(command.getName() + "\t->\t" + command.getHelpInfo(), AttributedStyle.DEFAULT, AttributedStyle.CYAN);
+        if(command.getAliases().length != 0){
+            MessageStyler.sendInfo(command.getName() + "\t->\t" + command.getHelpInfo() + "\t-> Aliases: " + Arrays.toString(command.getAliases()), AttributedStyle.DEFAULT, AttributedStyle.CYAN);
+        }else{
+            MessageStyler.sendInfo(command.getName() + "\t->\t" + command.getHelpInfo(), AttributedStyle.DEFAULT, AttributedStyle.CYAN);
+        }
     }
 
     @Override
