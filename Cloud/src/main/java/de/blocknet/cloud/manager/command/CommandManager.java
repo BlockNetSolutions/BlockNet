@@ -1,6 +1,5 @@
 package de.blocknet.cloud.manager.command;
 
-import de.blocknet.cloud.command.Command;
 import lombok.Getter;
 import org.jline.terminal.Terminal;
 

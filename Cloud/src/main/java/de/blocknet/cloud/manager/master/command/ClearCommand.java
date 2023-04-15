@@ -1,5 +1,6 @@
-package de.blocknet.cloud.command;
+package de.blocknet.cloud.manager.master.command;
 
+import de.blocknet.cloud.manager.command.Command;
 import de.blocknet.cloud.terminal.Extra;
 import org.jline.terminal.Terminal;
 

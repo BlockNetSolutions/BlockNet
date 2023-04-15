@@ -1,7 +1,8 @@
-package de.blocknet.cloud.manager.command;
+package de.blocknet.cloud.manager.master.command;
 
 import de.blocknet.cloud.Main;
-import de.blocknet.cloud.command.Command;
+import de.blocknet.cloud.manager.command.Command;
+import de.blocknet.cloud.manager.command.CommandManager;
 import org.jline.terminal.Terminal;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;

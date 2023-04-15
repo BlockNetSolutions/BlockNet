@@ -1,4 +1,4 @@
-package de.blocknet.cloud.command;
+package de.blocknet.cloud.manager.command;
 
 import org.jline.terminal.Terminal;
 
