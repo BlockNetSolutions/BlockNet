@@ -1,5 +1,6 @@
-package de.blocknet.cloud.commands;
+package de.blocknet.cloud.manager.command;
 
+import de.blocknet.cloud.command.Command;
 import lombok.Getter;
 import org.jline.terminal.Terminal;
 
@@ -36,6 +37,19 @@ public class CommandManager {
     }
 
 
+
+    public Command getCommand(String name){
+        Command command = null;
+        for (Command c : getCommands()) {
+
+            if (c.getName().equalsIgnoreCase(name)) {
+                command = c;
+                break;
+            }
+        }
+
+        return command;
+    }
 
     public boolean runCommand(Terminal terminal, String name, String[] args) {
         Command command = null;

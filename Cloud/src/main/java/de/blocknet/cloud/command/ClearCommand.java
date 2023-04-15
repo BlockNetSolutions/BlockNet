@@ -1,10 +1,7 @@
-package de.blocknet.cloud.commands;
+package de.blocknet.cloud.command;
 
-import de.blocknet.cloud.Main;
 import de.blocknet.cloud.terminal.Extra;
 import org.jline.terminal.Terminal;
-import org.jline.utils.AttributedString;
-import org.jline.utils.AttributedStyle;
 
 public class ClearCommand implements Command {
 

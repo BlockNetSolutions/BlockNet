@@ -1,11 +1,10 @@
 package de.blocknet.cloud;
 
-import de.blocknet.cloud.commands.ClearCommand;
-import de.blocknet.cloud.commands.CommandManager;
-import de.blocknet.cloud.commands.HelpCommand;
+import de.blocknet.cloud.command.ClearCommand;
+import de.blocknet.cloud.manager.command.CommandManager;
+import de.blocknet.cloud.manager.command.HelpCommand;
 import de.blocknet.cloud.terminal.CommandCompleter;
 import de.blocknet.cloud.terminal.Extra;
-import de.blocknet.setup.SetupManager;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.UserInterruptException;
@@ -14,12 +13,9 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
-import org.jline.utils.InfoCmp;
 
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.LogRecord;
@@ -88,15 +84,10 @@ public class Main {
                 if (!line.isEmpty()) {
                     line = line.trim();
                     line = line.toLowerCase();
-
                     String[] lineArgs = line.split(" ");
-
                     String cmdName = lineArgs[0];
-
                     List<String> lineArgsTemp = new ArrayList<>(Arrays.asList(lineArgs));
-
                     lineArgsTemp.remove(0);
-
                     lineArgs = lineArgsTemp.toArray(new String[lineArgsTemp.size()]);
 
 

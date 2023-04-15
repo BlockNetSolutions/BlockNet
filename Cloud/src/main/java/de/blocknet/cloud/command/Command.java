@@ -1,8 +1,6 @@
-package de.blocknet.cloud.commands;
+package de.blocknet.cloud.command;
 
 import org.jline.terminal.Terminal;
-
-import java.util.List;
 
 public interface Command {
 
