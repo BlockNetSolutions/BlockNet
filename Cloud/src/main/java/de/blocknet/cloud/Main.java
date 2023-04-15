@@ -73,7 +73,7 @@ public class Main {
 
 
         String prompt = new AttributedString(USER, AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "@BlockNet-" + VERSION
-                + new AttributedString(" ⚡︎ ", AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW)).toAnsi();
+                + new AttributedString(" # ", AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW)).toAnsi();
 
         String line;
         try {

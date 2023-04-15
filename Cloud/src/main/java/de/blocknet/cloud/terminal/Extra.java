@@ -25,7 +25,6 @@ public class Extra {
                         "                                                                          \n" +
                         "                                                                          \n" +
                         "                                                                          ");
-        terminal.writer().println(System.getProperty("os"));
     }
 
 }
