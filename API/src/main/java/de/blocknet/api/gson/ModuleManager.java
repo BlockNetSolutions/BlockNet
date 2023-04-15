@@ -53,13 +53,15 @@ public class ModuleManager {
         fileWriter.flush();
         fileWriter.close();
     }
+
     public void createdictionary(String path) {
         File dictionary = new File(path);
-        if(!dictionary.exists()) dictionary.mkdirs();
+        if (!dictionary.exists()) dictionary.mkdirs();
     }
+
     public void deletedictionary(String path) {
         File dictionary = new File(path);
-        if(dictionary.exists()) dictionary.delete();
+        if (dictionary.exists()) dictionary.delete();
     }
 
     @SneakyThrows

@@ -4,6 +4,7 @@ import de.blocknet.cloud.Main;
 import de.blocknet.cloud.manager.command.CommandManager;
 import de.blocknet.cloud.manager.master.command.ClearCommand;
 import de.blocknet.cloud.manager.master.command.HelpCommand;
+import de.blocknet.cloud.manager.master.command.StopCommand;
 import de.blocknet.cloud.terminal.CommandCompleter;
 import de.blocknet.cloud.terminal.Extra;
 import lombok.Getter;
@@ -17,13 +18,10 @@ import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.LogRecord;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-
-import static java.util.Objects.requireNonNull;
 
 public class Master {
 
@@ -43,6 +41,7 @@ public class Master {
         new CommandManager().init();
         CommandManager.getInstance().registerCommand(new HelpCommand());
         CommandManager.getInstance().registerCommand(new ClearCommand());
+        CommandManager.getInstance().registerCommand(new StopCommand());
 
 
         TerminalBuilder builder = TerminalBuilder.builder();
@@ -61,8 +60,6 @@ public class Master {
         Extra.clear(terminal);
 
 
-
-
         String prompt = new AttributedString(USER, AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "@BlockNet-" + VERSION
                 + new AttributedString(" # ", AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW)).toAnsi();
 
@@ -79,7 +76,7 @@ public class Master {
                     lineArgs = lineArgsTemp.toArray(new String[lineArgsTemp.size()]);
 
 
-                    if(!CommandManager.getInstance().runCommand(terminal, cmdName, lineArgs)){
+                    if (!CommandManager.getInstance().runCommand(terminal, cmdName, lineArgs)) {
                         logger.warning(new AttributedString("Command \"" + cmdName + "\" not found!", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi());
                     }
                 }

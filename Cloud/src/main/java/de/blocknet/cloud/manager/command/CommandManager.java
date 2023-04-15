@@ -20,14 +20,14 @@ public class CommandManager {
     }
 
 
-    public void registerCommand(Command command){
+    public void registerCommand(Command command) {
         getCommands().add(command);
     }
 
-    public List<String> getCommandsAsName(){
+    public List<String> getCommandsAsName() {
         List<String> commands = new ArrayList<String>();
 
-        for(Command command : getCommands()){
+        for (Command command : getCommands()) {
             commands.add(command.getName());
         }
 
@@ -36,8 +36,7 @@ public class CommandManager {
     }
 
 
-
-    public Command getCommand(String name){
+    public Command getCommand(String name) {
         Command command = null;
         for (Command c : getCommands()) {
 
@@ -50,11 +49,23 @@ public class CommandManager {
         return command;
     }
 
+
+    public boolean commandHasAlias(Command command, String alias) {
+        Boolean has = false;
+        for (int i = 0; i < command.getAliases().length; i++) {
+            if (alias.equalsIgnoreCase(command.getAliases()[i])) {
+                has = true;
+                break;
+            }
+        }
+        return has;
+    }
+
     public boolean runCommand(Terminal terminal, String name, String[] args) {
         Command command = null;
         for (Command c : getCommands()) {
 
-            if (c.getName().equalsIgnoreCase(name)) {
+            if (c.getName().equalsIgnoreCase(name) || commandHasAlias(c, name)) {
                 command = c;
                 break;
             }

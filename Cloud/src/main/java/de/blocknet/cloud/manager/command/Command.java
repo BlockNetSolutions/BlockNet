@@ -7,7 +7,8 @@ public interface Command {
 
     String getName();
 
-    String[] getArgs();
+
+    String[] getAliases();
 
     void onCommand(Terminal terminal, String[] args);
 

@@ -3,9 +3,6 @@ package de.blocknet.setup;
 import de.blocknet.api.gson.ModuleManager;
 
 import java.io.*;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SetupManager {
@@ -15,14 +12,14 @@ public class SetupManager {
     public SetupManager(Logger logger, String input) {
         moduleManager = new ModuleManager();
         input = input.toLowerCase();
-        switch (input){
+        switch (input) {
             case "master":
-                    startSetupMaster();
-                    logger.info("§aDer Master wurde nun erstellt, stoppe nun das Setup und erstelle mindestens eine Base.");
+                startSetupMaster();
+                logger.info("§aDer Master wurde nun erstellt, stoppe nun das Setup und erstelle mindestens eine Base.");
                 break;
             case "base":
-                    startSetupBase();
-                    logger.info("§aEs wurde nun eine Base erstellt.");
+                startSetupBase();
+                logger.info("§aEs wurde nun eine Base erstellt.");
                 break;
         }
     }
@@ -33,7 +30,7 @@ public class SetupManager {
         moduleManager.createdictionary("templates/proxies");
         moduleManager.createdictionary("templates/servers");
         try (InputStream in = getClass().getResourceAsStream("/start_master");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+             BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
@@ -48,6 +45,7 @@ public class SetupManager {
             throw new RuntimeException(e);
         }
     }
+
     public void startSetupBase() {
         moduleManager.createdictionary("/static/lobbies");
         moduleManager.createdictionary("/static/servers");

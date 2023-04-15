@@ -1,33 +1,34 @@
 package de.blocknet.cloud.manager.master.command;
 
 import de.blocknet.cloud.manager.command.Command;
-import de.blocknet.cloud.terminal.Extra;
+import de.blocknet.cloud.utils.MessageStyler;
 import org.jline.terminal.Terminal;
+import org.jline.utils.AttributedStyle;
 
-public class ClearCommand implements Command {
+public class StopCommand implements Command {
 
     @Override
     public String getName() {
-        return "clear";
+        return "stop";
     }
-
 
     @Override
     public String[] getAliases() {
         return new String[]{
-                "cls",
+                "exit",
         };
     }
 
 
     @Override
     public void onCommand(Terminal terminal, String[] args) {
-        Extra.clear(terminal);
+        System.out.println(MessageStyler.getColoredAnsi("Stopping...", AttributedStyle.DEFAULT, AttributedStyle.RED));
+        System.exit(0);
     }
 
     @Override
     public String getHelpInfo() {
-        return "clears the Terminal";
+        return "Stops the Cloud";
     }
 
 

@@ -20,6 +20,7 @@ public class Main {
         logger = registerLogger("Master");
         Master master = new Master(logger);
     }
+
     private static Logger registerLogger(String loggerName) throws SecurityException, IllegalArgumentException {
         Objects.requireNonNull(loggerName, "Logger name must not be null");
         if (loggerName.isEmpty()) {
@@ -32,6 +33,7 @@ public class Main {
         ConsoleHandler handler = new ConsoleHandler();
         handler.setFormatter(new SimpleFormatter() {
             private static final String format = "[%1$tT] %2$-7s: %3$s %n";
+
             @Override
             public synchronized String format(LogRecord lr) {
                 return String.format(format,
