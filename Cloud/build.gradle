@@ -24,7 +24,8 @@ test {
 }
 
 shadowJar {
-    archiveFileName = "${archivesBaseName}-${version}.jar"
+    //archiveFileName = "${archivesBaseName}-${version}.jar"
+    archiveFileName = "BlockNet.jar"
     destinationDirectory = file("$buildDir/jars")
     manifest {
         attributes(
