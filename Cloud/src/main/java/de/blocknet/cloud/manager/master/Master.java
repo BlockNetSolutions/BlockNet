@@ -17,34 +17,29 @@ import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+
+import static java.util.Objects.requireNonNull;
 
 public class Master {
 
 
     private String USER = System.getProperty("user.name");
 
-    @Getter
     private Logger logger;
-    private String VERSION = Main.class.getPackage().getImplementationVersion();
 
-    @Getter
-    private String name = "Master";
+    private String VERSION = Main.class.getPackage().getImplementationVersion();
 
     @Getter
     public Master instance;
 
-    public Master() {
-        registerLogger();
+    public Master(Logger logger) {
         instance = this;
-
+        this.logger = logger;
         new CommandManager().init();
         CommandManager.getInstance().registerCommand(new HelpCommand());
         CommandManager.getInstance().registerCommand(new ClearCommand());
@@ -103,29 +98,4 @@ public class Master {
             }
         }
     }
-
-
-    private void registerLogger() {
-        Logger mainLogger = Logger.getLogger("de.blocknet.cloud.master");
-        mainLogger.setUseParentHandlers(false);
-        ConsoleHandler handler = new ConsoleHandler();
-        handler.setFormatter(new SimpleFormatter() {
-            //private static final String format = "[%1$tF %1$tT] %2$-7s: %3$s %n";
-            private static final String format = "[%1$tT] %2$-7s: %3$s %n";
-            @Override
-            public synchronized String format(LogRecord lr) {
-                return String.format(format,
-                        new Date(lr.getMillis()),
-                        lr.getLevel().getLocalizedName(),
-                        lr.getMessage()
-                );
-            }
-        });
-
-
-        mainLogger.addHandler(handler);
-
-        this.logger = mainLogger;
-    }
-
 }

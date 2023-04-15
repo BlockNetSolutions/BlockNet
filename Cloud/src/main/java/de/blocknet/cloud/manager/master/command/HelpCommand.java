@@ -3,6 +3,7 @@ package de.blocknet.cloud.manager.master.command;
 import de.blocknet.cloud.Main;
 import de.blocknet.cloud.manager.command.Command;
 import de.blocknet.cloud.manager.command.CommandManager;
+import de.blocknet.cloud.utils.MessageStyler;
 import org.jline.terminal.Terminal;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
@@ -30,13 +31,13 @@ public class HelpCommand implements Command {
                 Command command = CommandManager.getInstance().getCommand(args[0]);
                 printHelp(command);
             }else{
-                Main.getLogger().warning(new AttributedString("This command does not exist!", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi());
+                MessageStyler.sendInfo("This command does not exist!",AttributedStyle.DEFAULT,AttributedStyle.RED);
             }
         }
     }
 
     public void printHelp(Command command){
-        Main.getLogger().info(new AttributedString(command.getName() + "\t->\t" + command.getHelpInfo(), AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)).toAnsi());
+        MessageStyler.sendInfo(command.getName() + "\t->\t" + command.getHelpInfo(), AttributedStyle.DEFAULT,AttributedStyle.CYAN);
     }
 
     @Override
