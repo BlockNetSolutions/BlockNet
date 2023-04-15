@@ -14,17 +14,16 @@ public class Extra {
         terminal.writer().println(
                 " \n" +
                         " \n" +
-                        new AttributedString(" /$$$$$$$  /$$                     /$$       ", AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)).toAnsi() + "/$$   /$$             /$$    \n" +
-                        new AttributedString("| $$__  $$| $$                    | $$      ", AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)).toAnsi() + "| $$$ | $$            | $$    \n" +
-                        new AttributedString("| $$  \\ $$| $$  /$$$$$$   /$$$$$$$| $$   /$$", AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)).toAnsi() + "| $$$$| $$  /$$$$$$  /$$$$$$  \n" +
-                        new AttributedString("| $$$$$$$ | $$ /$$__  $$ /$$_____/| $$  /$$/", AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)).toAnsi() + "| $$ $$ $$ /$$__  $$|_  $$_/  \n" +
-                        new AttributedString("| $$__  $$| $$| $$  \\ $$| $$      | $$$$$$/ ", AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)).toAnsi() + "| $$  $$$$| $$$$$$$$  | $$    \n" +
-                        new AttributedString("| $$  \\ $$| $$| $$  | $$| $$      | $$_  $$ ", AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)).toAnsi() + "| $$\\  $$$| $$_____/  | $$ /$$\n" +
-                        new AttributedString("| $$$$$$$/| $$|  $$$$$$/|  $$$$$$$| $$ \\  $$", AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)).toAnsi() + "| $$ \\  $$|  $$$$$$$  |  $$$$/\n" +
-                        new AttributedString("|_______/ |__/ \\______/  \\_______/|__/  \\__/", AttributedStyle.DEFAULT.foreground(AttributedStyle.CYAN)).toAnsi() + "|__/  \\__/ \\_______/   \\___/     " + Main.class.getPackage().getImplementationVersion() + "\n" +
+                        new AttributedString(" /$$$$$$$  /$$                     /$$       ", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "/$$   /$$             /$$    \n" +
+                        new AttributedString("| $$__  $$| $$                    | $$      ", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "| $$$ | $$            | $$    \n" +
+                        new AttributedString("| $$  \\ $$| $$  /$$$$$$   /$$$$$$$| $$   /$$", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "| $$$$| $$  /$$$$$$  /$$$$$$  \n" +
+                        new AttributedString("| $$$$$$$ | $$ /$$__  $$ /$$_____/| $$  /$$/", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "| $$ $$ $$ /$$__  $$|_  $$_/  \n" +
+                        new AttributedString("| $$__  $$| $$| $$  \\ $$| $$      | $$$$$$/ ", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "| $$  $$$$| $$$$$$$$  | $$    \n" +
+                        new AttributedString("| $$  \\ $$| $$| $$  | $$| $$      | $$_  $$ ", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "| $$\\  $$$| $$_____/  | $$ /$$\n" +
+                        new AttributedString("| $$$$$$$/| $$|  $$$$$$/|  $$$$$$$| $$ \\  $$", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "| $$ \\  $$|  $$$$$$$  |  $$$$/\n" +
+                        new AttributedString("|_______/ |__/ \\______/  \\_______/|__/  \\__/", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "|__/  \\__/ \\_______/   \\___/     " + Main.class.getPackage().getImplementationVersion() + "\n" +
                         "                                                                          \n" +
                         "                                                                          \n" +
                         "                                                                          ");
     }
-
 }
