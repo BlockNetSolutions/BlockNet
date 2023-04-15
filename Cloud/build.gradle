@@ -28,7 +28,8 @@ shadowJar {
     destinationDirectory = file("$buildDir/jars")
     manifest {
         attributes(
-                "Main-Class": "de.blocknet.cloud.Main"
+                "Main-Class": "de.blocknet.cloud.Main",
+                'Implementation-Version': version
         )
     }
 }
