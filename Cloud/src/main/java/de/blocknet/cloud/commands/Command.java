@@ -1,11 +1,17 @@
 package de.blocknet.cloud.commands;
 
-import jdk.nashorn.internal.ir.Terminal;
+import org.jline.terminal.Terminal;
+
+import java.util.List;
 
 public interface Command {
 
 
-    void onCommand(String name, String[] args);
+    String getName();
+
+    String[] getArgs();
+
+    void onCommand(Terminal terminal, String[] args);
 
     String getHelpInfo();
 

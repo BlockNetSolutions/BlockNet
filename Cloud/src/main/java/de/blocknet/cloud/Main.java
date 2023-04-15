@@ -1,5 +1,8 @@
 package de.blocknet.cloud;
 
+import de.blocknet.cloud.commands.ClearCommand;
+import de.blocknet.cloud.commands.CommandManager;
+import de.blocknet.cloud.commands.HelpCommand;
 import de.blocknet.cloud.terminal.CommandCompleter;
 import de.blocknet.cloud.terminal.Extra;
 import de.blocknet.setup.SetupManager;
@@ -17,10 +20,7 @@ import org.jline.utils.InfoCmp;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -32,6 +32,7 @@ public class Main {
     private static Logger LOGGER = null;
 
     private static String VERSION = Main.class.getPackage().getImplementationVersion();
+
 
     static {
         Logger mainLogger = Logger.getLogger("de.blocknet");
@@ -55,16 +56,22 @@ public class Main {
     }
 
 
-    private static List<String> commands = Arrays.asList("clear", "help", "stop");
-
-
     public static void main(String[] args) throws IOException, InterruptedException {
+
+        new CommandManager().init();
+
+
+        CommandManager.getInstance().registerCommand(new HelpCommand());
+        CommandManager.getInstance().registerCommand(new ClearCommand());
+
+
+
         TerminalBuilder builder = TerminalBuilder.builder();
         Terminal terminal = builder.build();
         LineReader reader = LineReaderBuilder.builder()
                 .terminal(terminal)
                 .parser(new DefaultParser())
-                .completer(new CommandCompleter(commands))
+                .completer(new CommandCompleter(CommandManager.getInstance().getCommandsAsName()))
                 .build();
 
         Extra.clear(terminal);
@@ -81,27 +88,20 @@ public class Main {
                 if (!line.isEmpty()) {
                     line = line.trim();
                     line = line.toLowerCase();
-                    switch (line) {
-                        case ("clear"):
-                            Extra.clear(terminal);
-                            break;
-                        case ("help"):
-                            System.out.println(" ");
-                            Thread.sleep(2);
-                            LOGGER.info(new AttributedString("clear\t->\tClear the Console", AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW)).toAnsi());
-                            LOGGER.info(new AttributedString("help\t->\tShows this Message", AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW)).toAnsi());
-                            LOGGER.info(new AttributedString("stop\t->\tStops the Cloud", AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW)).toAnsi());
-                            System.out.println(" ");
-                            break;
-                        case ("stop"):
-                            LOGGER.info(new AttributedString("Exiting...", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi());
-                            System.exit(0);
-                            break;
-                        default:
-                            if(line.split(" ")[0] != null && line.split(" ")[0].trim() != ""){
-                                LOGGER.info(new AttributedString("Command \"" + line.split(" ")[0] + "\" not found", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi());
-                            }
-                            break;
+
+                    String[] lineArgs = line.split(" ");
+
+                    String cmdName = lineArgs[0];
+
+                    List<String> lineArgsTemp = new ArrayList<>(Arrays.asList(lineArgs));
+
+                    lineArgsTemp.remove(0);
+
+                    lineArgs = lineArgsTemp.toArray(new String[lineArgsTemp.size()]);
+
+
+                    if(!CommandManager.getInstance().runCommand(terminal, cmdName, lineArgs)){
+                        LOGGER.warning(new AttributedString("Command \"" + cmdName + "\" not found!", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi());
                     }
                 }
             }
