@@ -7,10 +7,7 @@ import org.jline.reader.Completer;
 import org.jline.reader.LineReader;
 import org.jline.reader.ParsedLine;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CommandCompleter implements Completer {
     private final List<String> commands;
@@ -22,7 +19,9 @@ public class CommandCompleter implements Completer {
     @Override
     public void complete(LineReader reader, ParsedLine parsedLine, List<Candidate> candidates) {
 
-        String line = parsedLine.line();
+        String orgLine = parsedLine.line();
+        String line = orgLine;
+
         line = line.trim();
         line = line.toLowerCase();
         String[] lineArgs = line.split(" ");
@@ -31,14 +30,19 @@ public class CommandCompleter implements Completer {
         lineArgsTemp.remove(0);
         lineArgs = lineArgsTemp.toArray(new String[lineArgsTemp.size()]);
 
+        int argIndex;
+        if (orgLine.endsWith(" ")) {
+            argIndex = lineArgs.length;
+        }else{
+            argIndex = lineArgs.length - 1;
+        }
 
         if(CommandManager.getInstance().getCommand(cmdName) != null){
             Command command = CommandManager.getInstance().getCommand(cmdName);
 
-            if(command.getArguments().containsKey(lineArgs.length)) {
+            if(command.getArguments().containsKey(argIndex)) {
 
-
-                for(String arg : command.getArguments().get(lineArgs.length)) {
+                for(String arg : command.getArguments().get(argIndex)) {
                     candidates.add(new Candidate(arg));
                 }
             }
