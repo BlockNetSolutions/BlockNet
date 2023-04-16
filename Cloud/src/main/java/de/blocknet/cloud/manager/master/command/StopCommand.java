@@ -25,6 +25,9 @@ public class StopCommand implements Command {
     @Override
     public HashMap<Integer, ArrayList<String>> getArguments() {
         HashMap<Integer, ArrayList<String>> args = new HashMap<Integer, ArrayList<String>>();
+        args.put(0, new ArrayList<String>());
+
+        args.get(0).add("-force");
 
         return args;
     }
