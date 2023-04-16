@@ -6,7 +6,9 @@ import de.blocknet.cloud.utils.MessageStyler;
 import org.jline.terminal.Terminal;
 import org.jline.utils.AttributedStyle;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class HelpCommand implements Command {
 
@@ -21,6 +23,20 @@ public class HelpCommand implements Command {
         return new String[]{
                 "h",
         };
+    }
+
+    @Override
+    public HashMap<Integer, ArrayList<String>> getArguments() {
+        HashMap<Integer, ArrayList<String>> args = new HashMap<Integer, ArrayList<String>>();
+        args.put(0, new ArrayList<String>());
+
+        for(Command command : CommandManager.getInstance().getCommands()){
+            if(command != this) {
+                args.get(0).add(command.getName());
+            }
+        }
+
+        return args;
     }
 
     @Override

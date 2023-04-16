@@ -4,6 +4,9 @@ import de.blocknet.cloud.manager.command.Command;
 import de.blocknet.cloud.terminal.Extra;
 import org.jline.terminal.Terminal;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class ClearCommand implements Command {
 
     @Override
@@ -17,6 +20,11 @@ public class ClearCommand implements Command {
         return new String[]{
                 "cls",
         };
+    }
+
+    @Override
+    public HashMap<Integer, ArrayList<String>> getArguments() {
+        return null;
     }
 
 

@@ -2,6 +2,9 @@ package de.blocknet.cloud.manager.command;
 
 import org.jline.terminal.Terminal;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public interface Command {
 
 
@@ -9,6 +12,8 @@ public interface Command {
 
 
     String[] getAliases();
+
+    HashMap<Integer, ArrayList<String>> getArguments();
 
     void onCommand(Terminal terminal, String[] args);
 
