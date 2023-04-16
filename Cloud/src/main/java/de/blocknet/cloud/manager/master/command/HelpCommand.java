@@ -6,6 +6,7 @@ import de.blocknet.cloud.utils.MessageStyler;
 import org.jline.terminal.Terminal;
 import org.jline.utils.AttributedStyle;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -50,16 +51,16 @@ public class HelpCommand implements Command {
                 Command command = CommandManager.getInstance().getCommand(args[0]);
                 printHelp(command);
             } else {
-                MessageStyler.sendInfo("This command does not exist!", AttributedStyle.DEFAULT, AttributedStyle.RED);
+                MessageStyler.sendInfo("§1This command does not exist!");
             }
         }
     }
 
     public void printHelp(Command command) {
         if(command.getAliases().length != 0){
-            MessageStyler.sendInfo(command.getName() + "\t->\t" + command.getHelpInfo() + "\t-> Aliases: " + Arrays.toString(command.getAliases()), AttributedStyle.DEFAULT, AttributedStyle.CYAN);
+            MessageStyler.sendInfo( "§6" + command.getName() + "\t§7->\t§2" + command.getHelpInfo() + "\t§7-> §7Aliases: §2" + Arrays.toString(command.getAliases()));
         }else{
-            MessageStyler.sendInfo(command.getName() + "\t->\t" + command.getHelpInfo(), AttributedStyle.DEFAULT, AttributedStyle.CYAN);
+            MessageStyler.sendInfo( "§6" + command.getName() + "\t§7->\t§2" + command.getHelpInfo());
         }
     }
 

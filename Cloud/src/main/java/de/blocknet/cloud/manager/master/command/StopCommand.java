@@ -35,7 +35,7 @@ public class StopCommand implements Command {
 
     @Override
     public void onCommand(Terminal terminal, String[] args) {
-        System.out.println(MessageStyler.getColoredAnsi("Stopping...", AttributedStyle.DEFAULT, AttributedStyle.RED));
+        System.out.println(MessageStyler.getFormattedString("§1Stopping..."));
         System.exit(0);
     }
 
