@@ -4,11 +4,8 @@ import de.blocknet.cloud.manager.command.Command;
 import de.blocknet.cloud.manager.command.CommandManager;
 import de.blocknet.cloud.utils.MessageStyler;
 import org.jline.terminal.Terminal;
-import org.jline.utils.AttributedStyle;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class HelpCommand implements Command {
@@ -29,8 +26,8 @@ public class HelpCommand implements Command {
         HashMap<Integer, ArrayList<String>> args = new HashMap<Integer, ArrayList<String>>();
         args.put(0, new ArrayList<String>());
 
-        for(Command command : CommandManager.getInstance().getCommands()){
-            if(command != this) {
+        for (Command command : CommandManager.getInstance().getCommands()) {
+            if (command != this) {
                 args.get(0).add(command.getName());
             }
         }
@@ -55,10 +52,10 @@ public class HelpCommand implements Command {
     }
 
     public void printHelp(Command command) {
-        if(command.getAliases().length != 0){
-            MessageStyler.sendInfo( "§6" + command.getName() + "\t§7->\t§2" + command.getHelpInfo());
-        }else{
-            MessageStyler.sendInfo( "§6" + command.getName() + "\t§7->\t§2" + command.getHelpInfo());
+        if (command.getAliases().length != 0) {
+            MessageStyler.sendInfo("§6" + command.getName() + "\t§7->\t§2" + command.getHelpInfo());
+        } else {
+            MessageStyler.sendInfo("§6" + command.getName() + "\t§7->\t§2" + command.getHelpInfo());
         }
     }
 

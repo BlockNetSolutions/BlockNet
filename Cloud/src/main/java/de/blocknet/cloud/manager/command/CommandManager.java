@@ -46,9 +46,9 @@ public class CommandManager {
             }
         }
 
-        if(command == null){
+        if (command == null) {
             for (Command c : getCommands()) {
-                for(String alias : c.getAliases()){
+                for (String alias : c.getAliases()) {
                     if (alias.equalsIgnoreCase(name)) {
                         command = c;
                         break;

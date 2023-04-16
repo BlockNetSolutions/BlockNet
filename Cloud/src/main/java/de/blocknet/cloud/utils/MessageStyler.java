@@ -4,8 +4,6 @@ import de.blocknet.cloud.Main;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
 
-import javax.smartcardio.ATR;
-
 public class MessageStyler {
 
 
@@ -35,16 +33,26 @@ public class MessageStyler {
 
     private static int getColor(char c) {
         switch (c) {
-            case '0': return AttributedStyle.BLACK;
-            case '1': return AttributedStyle.RED;
-            case '2': return AttributedStyle.GREEN;
-            case '3': return AttributedStyle.YELLOW;
-            case '4': return AttributedStyle.BLUE;
-            case '5': return AttributedStyle.MAGENTA;
-            case '6': return AttributedStyle.CYAN;
-            case '7': return AttributedStyle.WHITE;
-            case '8': return AttributedStyle.BRIGHT;
-            default: return -1;
+            case '0':
+                return AttributedStyle.BLACK;
+            case '1':
+                return AttributedStyle.RED;
+            case '2':
+                return AttributedStyle.GREEN;
+            case '3':
+                return AttributedStyle.YELLOW;
+            case '4':
+                return AttributedStyle.BLUE;
+            case '5':
+                return AttributedStyle.MAGENTA;
+            case '6':
+                return AttributedStyle.CYAN;
+            case '7':
+                return AttributedStyle.WHITE;
+            case '8':
+                return AttributedStyle.BRIGHT;
+            default:
+                return -1;
         }
     }
 

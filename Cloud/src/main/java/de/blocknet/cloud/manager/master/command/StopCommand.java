@@ -3,7 +3,6 @@ package de.blocknet.cloud.manager.master.command;
 import de.blocknet.cloud.manager.command.Command;
 import de.blocknet.cloud.utils.MessageStyler;
 import org.jline.terminal.Terminal;
-import org.jline.utils.AttributedStyle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
