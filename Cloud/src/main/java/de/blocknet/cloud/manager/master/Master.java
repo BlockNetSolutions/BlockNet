@@ -1,5 +1,8 @@
 package de.blocknet.cloud.manager.master;
 
+import de.blocknet.api.storage.json.ConfigManager;
+import de.blocknet.api.storage.mysql.impl.MasterConfig;
+import de.blocknet.api.storage.mysql.impl.MySQLConfig;
 import de.blocknet.cloud.Main;
 import de.blocknet.cloud.manager.command.CommandManager;
 import de.blocknet.cloud.manager.master.command.ClearCommand;
@@ -43,7 +46,8 @@ public class Master {
         CommandManager.getInstance().registerCommand(new HelpCommand());
         CommandManager.getInstance().registerCommand(new ClearCommand());
         CommandManager.getInstance().registerCommand(new StopCommand());
-
+        ConfigManager configManager = new ConfigManager();
+        configManager.addModule(new MasterConfig(new MySQLConfig("test",1,"t","ddd","sdfdfsafds")), true);
 
         TerminalBuilder builder = TerminalBuilder.builder();
         Terminal terminal = null;
