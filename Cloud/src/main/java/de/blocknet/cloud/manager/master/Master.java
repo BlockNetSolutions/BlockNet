@@ -7,6 +7,7 @@ import de.blocknet.cloud.manager.master.command.HelpCommand;
 import de.blocknet.cloud.manager.master.command.StopCommand;
 import de.blocknet.cloud.terminal.CommandCompleter;
 import de.blocknet.cloud.terminal.Extra;
+import de.blocknet.cloud.utils.MessageStyler;
 import lombok.Getter;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
@@ -77,7 +78,7 @@ public class Master {
 
 
                     if (!CommandManager.getInstance().runCommand(terminal, cmdName, lineArgs)) {
-                        logger.warning(new AttributedString("Command \"" + cmdName + "\" not found!", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi());
+                        logger.warning(new AttributedString("", AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi());
                     }
                 }
             }
