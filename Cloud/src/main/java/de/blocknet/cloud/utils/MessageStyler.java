@@ -4,6 +4,8 @@ import de.blocknet.cloud.Main;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
 
+import javax.smartcardio.ATR;
+
 public class MessageStyler {
 
 

@@ -56,7 +56,7 @@ public class HelpCommand implements Command {
 
     public void printHelp(Command command) {
         if(command.getAliases().length != 0){
-            MessageStyler.sendInfo( "§6" + command.getName() + "\t§7->\t§2" + command.getHelpInfo() + "\t§7-> §7Aliases: §2" + Arrays.toString(command.getAliases()));
+            MessageStyler.sendInfo( "§6" + command.getName() + "\t§7->\t§2" + command.getHelpInfo());
         }else{
             MessageStyler.sendInfo( "§6" + command.getName() + "\t§7->\t§2" + command.getHelpInfo());
         }
