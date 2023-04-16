@@ -1,8 +1,11 @@
 package de.blocknet.api.storage.mysql.impl;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Getter
+import java.util.HashMap;
+
+@Getter @AllArgsConstructor
 public class MySQLConfig {
 
     private String host;
@@ -10,4 +13,6 @@ public class MySQLConfig {
     private String database;
     private String user;
     private String password;
+
+
 }
