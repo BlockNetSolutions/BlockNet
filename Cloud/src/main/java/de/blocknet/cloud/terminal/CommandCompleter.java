@@ -7,7 +7,9 @@ import org.jline.reader.Completer;
 import org.jline.reader.LineReader;
 import org.jline.reader.ParsedLine;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CommandCompleter implements Completer {
     private final List<String> commands;
@@ -33,29 +35,29 @@ public class CommandCompleter implements Completer {
         int argIndex;
         if (orgLine.endsWith(" ")) {
             argIndex = lineArgs.length;
-        }else{
+        } else {
             argIndex = lineArgs.length - 1;
         }
 
         Boolean hasCompletition = false;
-        if(CommandManager.getInstance().getCommand(cmdName) != null){
+        if (CommandManager.getInstance().getCommand(cmdName) != null) {
             Command command = CommandManager.getInstance().getCommand(cmdName);
-            if(command.getArguments().containsKey(argIndex)) {
-                for(String arg : command.getArguments().get(argIndex)) {
+            if (command.getArguments().containsKey(argIndex)) {
+                for (String arg : command.getArguments().get(argIndex)) {
                     candidates.add(new Candidate(arg));
                 }
             }
             hasCompletition = true;
         }
 
-        if(!hasCompletition){
+        if (!hasCompletition) {
             orgLine = orgLine.trim();
-            for(Command command : CommandManager.getInstance().getCommands()){
-                if(command.getName().startsWith(orgLine)){
+            for (Command command : CommandManager.getInstance().getCommands()) {
+                if (command.getName().startsWith(orgLine)) {
                     candidates.add(new Candidate(command.getName()));
                 }
-                for(String alias : command.getAliases()){
-                    if(alias.startsWith(orgLine)){
+                for (String alias : command.getAliases()) {
+                    if (alias.startsWith(orgLine)) {
                         candidates.add(new Candidate(alias));
                     }
                 }

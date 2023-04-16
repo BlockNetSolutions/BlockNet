@@ -8,6 +8,7 @@ public class MySQLConnector {
 
     private Connection connection;
     private final MySQLConfig mySQLConfig;
+
     public MySQLConnector(MySQLConfig mySQLConfig) {
         this.mySQLConfig = mySQLConfig;
     }
