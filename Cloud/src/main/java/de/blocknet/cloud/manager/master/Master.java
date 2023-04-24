@@ -8,6 +8,7 @@ import de.blocknet.cloud.http.frontend.server.HttpServerFrontend;
 import de.blocknet.cloud.manager.command.CommandManager;
 import de.blocknet.cloud.manager.master.command.ClearCommand;
 import de.blocknet.cloud.manager.master.command.HelpCommand;
+import de.blocknet.cloud.manager.master.command.HttpServerCommand;
 import de.blocknet.cloud.manager.master.command.StopCommand;
 import de.blocknet.cloud.terminal.CommandCompleter;
 import de.blocknet.cloud.terminal.Extra;
@@ -39,7 +40,7 @@ public class Master {
     private String VERSION = Main.class.getPackage().getImplementationVersion();
 
     @Getter
-    public Master instance;
+    public static Master instance;
 
     @Getter
     private HttpServerFrontend frontendServer;
@@ -52,6 +53,7 @@ public class Master {
         CommandManager.getInstance().registerCommand(new HelpCommand());
         CommandManager.getInstance().registerCommand(new ClearCommand());
         CommandManager.getInstance().registerCommand(new StopCommand());
+        CommandManager.getInstance().registerCommand(new HttpServerCommand());
         ConfigManager configManager = new ConfigManager();
         configManager.addModule(new MasterConfig(new MySQLConfig("test",1,"t","ddd","sdfdfsafds")), true);
 
@@ -69,10 +71,11 @@ public class Master {
                 .build();
 
         Extra.clear(terminal);
-        terminal.writer().println(MessageStyler.getFormattedString("§3Starting HTTP servers... (" + 8000 + ")"));
+        Main.getLogger().info(MessageStyler.getFormattedString("§3Starting HTTP server... (" + 8000 + ")"));
         this.frontendServer = new HttpServerFrontend(8000, "/web");
         frontendServer.start();
-        terminal.writer().println(MessageStyler.getFormattedString("§2HTTP servers started!"));
+        Main.getLogger().info(MessageStyler.getFormattedString("§2HTTP server started!"));
+        Main.getLogger().info(("The cloud will launch shortly"));
         Extra.clear(terminal);
 
         String prompt = new AttributedString(USER, AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "@BlockNet-" + VERSION

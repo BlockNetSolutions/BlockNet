@@ -24,21 +24,24 @@ public class HttpServerFrontend {
     public void start() {
         stop();
 
-        new Thread(() -> {
-            try {
-                HttpServer server = HttpServer.create(new InetSocketAddress(this.port), 0);
-                server.createContext("/", new FrontendHandler(this.resourceDir));
-                server.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }).start();
+        this.serverThread = new Thread(() -> {
+                try {
+                    HttpServer server = HttpServer.create(new InetSocketAddress(this.port), 0);
+                    server.createContext("/", new FrontendHandler(this.resourceDir));
+                    server.start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+        });
+
+        this.serverThread.start();
     }
 
 
     public void stop() {
         if(this.serverThread != null) {
-            serverThread.stop();
+            this.serverThread.interrupt();
         }
     }
 

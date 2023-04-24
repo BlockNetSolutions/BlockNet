@@ -27,7 +27,14 @@ public class FrontendHandler implements HttpHandler {
         String requestURI = t.getRequestURI().toString();
         if (requestURI.endsWith("/")) {
             requestURI += "index.html";
+        }else if(requestURI.equalsIgnoreCase("/stop")){
+            System.out.println(t.getRemoteAddress().getAddress().getHostAddress());
+            t.getResponseHeaders().set("Location", "/");
+            t.sendResponseHeaders(301, -1);
+            t.close();
         }
+
+
         String resourcePath = root + requestURI;
         InputStream resource = Main.class.getResourceAsStream(resourcePath);
 

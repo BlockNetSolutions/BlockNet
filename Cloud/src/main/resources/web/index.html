@@ -31,10 +31,77 @@
 				opacity: 0;
 			}
 		}
+		.logo {
+			background-image: url("logo.png");
+              background-size: 350px 350px;
+              background-position: center;
+              background-repeat: no-repeat;
+              height: 350px;
+              width: 350px;
+              margin: 0 auto;
+              animation: hover 3s ease-in-out infinite;
+        }
+
+            @keyframes hover {
+              0% {
+                transform: translateY(15px);
+              }
+              50% {
+                transform: translateY(-0px);
+              }
+              100% {
+                transform: translateY(15px);
+              }
+            }
+
+
+
+            .stop-btn {
+			border: 2px solid #ff0000;
+			background-color: #000;
+			color: #ff0000;
+			padding: 10px 20px;
+			font-size: 1.2em;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			cursor: pointer;
+			transition: all 0.3s ease-in-out;
+			position: relative;
+			overflow: hidden;
+		}
+		.stop-btn:hover {
+			color: #000;
+			background-color: #ff0000;
+			border: 2px solid #ff0000;
+		}
+		.stop-btn:before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%) rotate(45deg);
+			height: 150%;
+			width: 150%;
+			background-color: #ff0000;
+			transition: all 0.3s ease-in-out;
+			z-index: -1;
+		}
+		.stop-btn:hover:before {
+			height: 100%;
+			width: 100%;
+			background-color: #2f2f2f;
+		}
+
+		body {
+		    margin: 0 0;
+		}
 	</style>
 </head>
 <body>
-<h1>BlockNet Cloud Dashboard</h1>
-<p>This page is not yet available <span class="cursor"></span></p>
+<div class="logo"></div>
+<!--<h1>BlockNet Cloud Dashboard</h1>-->
+<h3>This page is not yet available <span class="cursor"></span></h3>
+<button class="stop-btn" onclick="window.location.href='/stop'">STOP</button>
 </body>
 </html>

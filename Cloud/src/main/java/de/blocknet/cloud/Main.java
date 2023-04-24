@@ -18,9 +18,12 @@ public class Main {
     @Getter
     private static Logger logger;
 
+    @Getter
+    private static Master master;
+
     public static void main(String[] args) {
         logger = registerLogger("Master");
-        Master master = new Master(logger);
+        master = new Master(logger);
     }
 
     private static Logger registerLogger(String loggerName) throws SecurityException, IllegalArgumentException {
