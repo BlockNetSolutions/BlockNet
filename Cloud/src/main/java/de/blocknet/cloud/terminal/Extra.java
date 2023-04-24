@@ -9,6 +9,7 @@ import org.jline.utils.InfoCmp;
 public class Extra {
 
     public static void clear(Terminal terminal) {
+
         terminal.puts(InfoCmp.Capability.clear_screen);
         terminal.flush();
         terminal.writer().println(

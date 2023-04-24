@@ -4,13 +4,16 @@ import de.blocknet.api.storage.json.ConfigManager;
 import de.blocknet.api.storage.mysql.impl.MasterConfig;
 import de.blocknet.api.storage.mysql.impl.MySQLConfig;
 import de.blocknet.cloud.Main;
+import de.blocknet.cloud.http.frontend.server.HttpServerFrontend;
 import de.blocknet.cloud.manager.command.CommandManager;
 import de.blocknet.cloud.manager.master.command.ClearCommand;
 import de.blocknet.cloud.manager.master.command.HelpCommand;
 import de.blocknet.cloud.manager.master.command.StopCommand;
 import de.blocknet.cloud.terminal.CommandCompleter;
 import de.blocknet.cloud.terminal.Extra;
+import de.blocknet.cloud.utils.MessageStyler;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.UserInterruptException;
@@ -38,6 +41,10 @@ public class Master {
     @Getter
     public Master instance;
 
+    @Getter
+    private HttpServerFrontend frontendServer;
+
+    @SneakyThrows
     public Master(Logger logger) {
         instance = this;
         this.logger = logger;
@@ -62,7 +69,11 @@ public class Master {
                 .build();
 
         Extra.clear(terminal);
-
+        terminal.writer().println(MessageStyler.getFormattedString("§3Starting HTTP servers... (" + 8000 + ")"));
+        this.frontendServer = new HttpServerFrontend(8000, "/web");
+        frontendServer.start();
+        terminal.writer().println(MessageStyler.getFormattedString("§2HTTP servers started!"));
+        Extra.clear(terminal);
 
         String prompt = new AttributedString(USER, AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "@BlockNet-" + VERSION
                 + new AttributedString(" # ", AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW)).toAnsi();
@@ -89,6 +100,8 @@ public class Master {
             /*terminal.puts(InfoCmp.Capability.clear_screen);
             terminal.flush();*/
             // User hit Ctrl-C or Ctrl-D
+            this.frontendServer.stop();
+            System.exit(0);
         } catch (Throwable t) {
             t.printStackTrace();
         } finally {

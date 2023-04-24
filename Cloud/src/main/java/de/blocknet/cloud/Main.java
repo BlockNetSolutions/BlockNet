@@ -1,6 +1,8 @@
 package de.blocknet.cloud;
 
 
+import de.blocknet.cloud.http.frontend.handler.FrontendHandler;
+import de.blocknet.cloud.http.frontend.server.HttpServerFrontend;
 import de.blocknet.cloud.manager.master.Master;
 import lombok.Getter;
 
@@ -43,6 +45,7 @@ public class Main {
                 );
             }
         });
+
         logger.addHandler(handler);
         return logger;
     }
