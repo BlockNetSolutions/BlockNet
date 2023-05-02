@@ -47,7 +47,7 @@ public class HttpServerCommand implements Command {
             switch (args[0].toLowerCase()){
                 case "start":
                     Master.getInstance().getFrontendServer().start();
-                    Main.getLogger().info("The http server has been started successfully.");
+                    Main.getLogger().info(MessageStyler.getFormattedString("The http server has been started successfully."));
                     break;
                 case "restart":
                     Master.getInstance().getFrontendServer().start();

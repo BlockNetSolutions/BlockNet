@@ -13,6 +13,8 @@ public class HttpServerFrontend {
     private String resourceDir;
     private Thread serverThread;
 
+    private HttpServer server;
+
     public HttpServerFrontend(int port, String resourceDir) {
         this.resourceDir = resourceDir;
         this.port = port;
@@ -24,24 +26,15 @@ public class HttpServerFrontend {
     public void start() {
         stop();
 
-        this.serverThread = new Thread(() -> {
-                try {
-                    HttpServer server = HttpServer.create(new InetSocketAddress(this.port), 0);
-                    server.createContext("/", new FrontendHandler(this.resourceDir));
-                    server.start();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-        });
-
-        this.serverThread.start();
+        this.server = HttpServer.create(new InetSocketAddress(this.port), 0);
+        this.server.createContext("/", new FrontendHandler(this.resourceDir));
+        this.server.start();
     }
 
 
     public void stop() {
-        if(this.serverThread != null) {
-            this.serverThread.interrupt();
+        if (this.server != null) {
+            this.server.stop(0);
         }
     }
 
