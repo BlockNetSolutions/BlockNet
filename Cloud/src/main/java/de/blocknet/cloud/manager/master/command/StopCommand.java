@@ -1,6 +1,7 @@
 package de.blocknet.cloud.manager.master.command;
 
 import de.blocknet.cloud.manager.command.Command;
+import de.blocknet.cloud.manager.master.Master;
 import de.blocknet.cloud.utils.MessageStyler;
 import org.jline.terminal.Terminal;
 
@@ -34,8 +35,7 @@ public class StopCommand implements Command {
 
     @Override
     public void onCommand(Terminal terminal, String[] args) {
-        System.out.println(MessageStyler.getFormattedString("§1Stopping..."));
-        System.exit(0);
+        Master.getInstance().stop();
     }
 
     @Override

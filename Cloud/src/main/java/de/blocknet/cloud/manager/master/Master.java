@@ -4,7 +4,7 @@ import de.blocknet.api.storage.json.ConfigManager;
 import de.blocknet.api.storage.mysql.impl.MasterConfig;
 import de.blocknet.api.storage.mysql.impl.MySQLConfig;
 import de.blocknet.cloud.Main;
-import de.blocknet.cloud.http.frontend.server.HttpServerFrontend;
+import de.blocknet.cloud.http.server.HttpServerFrontend;
 import de.blocknet.cloud.manager.command.CommandManager;
 import de.blocknet.cloud.manager.master.command.ClearCommand;
 import de.blocknet.cloud.manager.master.command.HelpCommand;
@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class Master {
@@ -70,13 +71,14 @@ public class Master {
                 .completer(new CommandCompleter(CommandManager.getInstance().getCommandsAsName()))
                 .build();
 
-        Extra.clear(terminal);
-        Main.getLogger().info(MessageStyler.getFormattedString("§3Starting HTTP server... (" + 8000 + ")"));
+        Extra.clear(terminal, false);
         this.frontendServer = new HttpServerFrontend(8000, "/web");
         frontendServer.start();
-        Main.getLogger().info(MessageStyler.getFormattedString("§2HTTP server started!"));
         Main.getLogger().info(("The cloud will launch shortly"));
-        Extra.clear(terminal);
+        Extra.clear(terminal, true);
+        if (Objects.equals(System.getProperty("user.name"), "root")) {
+            Main.getLogger().warning(MessageStyler.getFormattedString("§3It is not recommended to start BlockNet as root user!"));
+        }
 
         String prompt = new AttributedString(USER, AttributedStyle.DEFAULT.foreground(AttributedStyle.RED)).toAnsi() + "@BlockNet-" + VERSION
                 + new AttributedString(" # ", AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW)).toAnsi();
@@ -103,8 +105,7 @@ public class Master {
             /*terminal.puts(InfoCmp.Capability.clear_screen);
             terminal.flush();*/
             // User hit Ctrl-C or Ctrl-D
-            this.frontendServer.stop();
-            System.exit(0);
+            stop();
         } catch (Throwable t) {
             t.printStackTrace();
         } finally {
@@ -114,5 +115,13 @@ public class Master {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+
+    public void stop() {
+        Main.getLogger().info(MessageStyler.getFormattedString("§3Stopping all services..."));
+        this.frontendServer.stop();
+        Main.getLogger().info(MessageStyler.getFormattedString("§1Stopping..."));
+        System.exit(0);
     }
 }

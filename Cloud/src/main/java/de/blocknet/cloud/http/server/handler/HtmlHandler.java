@@ -1,4 +1,4 @@
-package de.blocknet.cloud.http.frontend.handler;
+package de.blocknet.cloud.http.server.handler;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -12,12 +12,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FrontendHandler implements HttpHandler {
+public class HtmlHandler implements HttpHandler {
 
     private String resourceDir;
 
 
-    public FrontendHandler(String resourceDir) {
+    public HtmlHandler(String resourceDir) {
         this.resourceDir = resourceDir;
     }
 

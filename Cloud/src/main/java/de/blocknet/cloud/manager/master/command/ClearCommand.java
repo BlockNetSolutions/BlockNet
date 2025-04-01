@@ -30,7 +30,7 @@ public class ClearCommand implements Command {
 
     @Override
     public void onCommand(Terminal terminal, String[] args) {
-        Extra.clear(terminal);
+        Extra.clear(terminal, true);
     }
 
     @Override
